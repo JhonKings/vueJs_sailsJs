@@ -1,11 +1,11 @@
 <script setup>
-import UserForm  from '../components/UsuarioForm.vue'
+import UnidadList  from '../components/UnidadList.vue'
 </script>
 
 <template>
     <main>
-        <div class="titulo">Modificar Usuario</div>
-        <UserForm :is-agregar="false"/>
+        <div class="titulo">Unidades</div>
+        <UnidadList/>
     </main>
 </template>
 <style>

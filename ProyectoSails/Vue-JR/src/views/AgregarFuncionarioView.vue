@@ -1,11 +1,12 @@
 <script setup>
-import UserForm  from '../components/UsuarioForm.vue'
+import FuncionarioForm  from '../components/FuncionarioForm.vue'
+
 </script>
 
 <template>
     <main>
-        <div class="titulo">Agregar hola</div>
-        <UserForm :is-agregar="true"/>
+        <div class="titulo">Agregar Funcionario</div>
+        <FuncionarioForm :is-agregar="true"/>
     </main>
 </template>
 <style>

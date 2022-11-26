@@ -4,17 +4,17 @@ import { RouterLink } from 'vue-router'
 export default {
     data(){
         return{
-            usuarios: []
+            funcionarios: []
         }
     },
     methods:{
-        async eliminarUsuario(event){
-            let confirmElimin = confirm('Esta seguro que desea eliminar?');
+        async eliminarFuncionarios(event){
+            let confirmElimin = confirm('Esta seguro que desea eliminar este Funcionario?');
 
             if(confirmElimin){
                 let idEliminar = event.target.dataset.id;
 
-                await fetch ("http://localhost:1337/user/"+idEliminar,{
+                await fetch ("http://localhost:1337/funcionarios/"+idEliminar,{
                     method: 'DELETE',
                     mode: 'cors',
                     cache: 'no-cache'
@@ -22,12 +22,12 @@ export default {
 
                 alert('Funcionario eliminado correctamente');
 
-                let resp = await fetch ("http://localhost:1337/user",{
+                let resp = await fetch ("http://localhost:1337/funcionarios",{
                     method: 'GET',
                     mode: 'cors',
                     cache: 'no-cache'
                 });
-                this.usuarios = await resp.json();
+                this.funcionarios = await resp.json();
 
             }
             
@@ -37,12 +37,12 @@ export default {
     },
     async mounted(){
 
-        let resp = await fetch ("http://localhost:1337/user",{
+        let resp = await fetch ("http://localhost:1337/funcionarios",{
                 method: 'GET',
                 mode: 'cors',
                 cache: 'no-cache'
             });
-        this.usuarios = await resp.json();
+        this.funcionarios = await resp.json();
     }
 }
 </script>
@@ -50,28 +50,26 @@ export default {
 <template>
     <main>
         <div class="button-add-container">
-            <RouterLink to="/agregar-usuario"><button>Agregar</button></RouterLink>
+            <RouterLink to="/agregar-funcionario"><button>Agregar</button></RouterLink>
         </div>
         <table>
             <tr>
                 <td>Nombre</td>
                 <td>Apellido</td>
                 <td>RUT</td>
-                <td>Fecha Nacimiento</td>
-                <td>Dirección</td>
-                <td>Genero</td>
+                <td>Perfil</td>
+                <td>Unidad</td>
                 <td>Acciones</td>
             </tr>
-            <tr v-for="user in usuarios">
-                <td>{{user.name}}</td>
+            <tr v-for="user in funcionarios">
+                <td>{{user.nombre}}</td>
                 <td>{{user.apellido}}</td>
                 <td>{{user.rut}}</td>
-                <td>{{user.fechaNacimiento}}</td>
-                <td>{{user.direccion}}</td>
-                <td>{{user.genero}}</td>
+                <td>{{user.perfil}}</td>
+                <td>{{user.unidadAdministrativa != ""?user.unidadAdministrativa.titulo:""}}</td>
                 <td>
-                    <RouterLink :to="'/modificar-usuario/'+user.id"><button>Modificar</button></RouterLink>
-                    <button @click="eliminarUsuario" :data-id="user.id">Eliminar</button>
+                    <RouterLink :to="'/modificar-funcionario/'+user.id"><button>Modificar</button></RouterLink>
+                    <button @click="eliminarFuncionarios" :data-id="user.id">Eliminar</button>
                 </td>
             </tr>
         </table>
