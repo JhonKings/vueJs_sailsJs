@@ -4,7 +4,7 @@ import UserForm  from '../components/UsuarioForm.vue'
 
 <template>
     <main>
-        <div class="titulo">Agregar Usuario</div>
+        <div class="titulo">Agregar hola</div>
         <UserForm :is-agregar="true"/>
     </main>
 </template>
